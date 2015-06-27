@@ -30,7 +30,6 @@ $event_location = array();
 foreach($data['Items']->Item as $item){
 	if(!array_search($item->StartDate, $schedule)){
 		$event_location_count = array_push($event_location, $item->Location->Location['Value']);
-		$i = 1;
 		if(preg_grep("/".$user_prefecture."/", $event_location)){
 			echo '<li>' . $item->Title . '</li>';
 			echo '<li>' . $item->Url . '</li>';
@@ -40,15 +39,7 @@ foreach($data['Items']->Item as $item){
 			echo '<li>' . $item->Tags->Tag->Name . '</li>';
 			echo '<hr />';
 
-			//イベント情報から引っ張ってくる
-			$event=array(
-				"title" => "北海道旅行",
-				"description" => "ぶらり旅",
-				"place" => "北海道",
-				"start_date" => "20200909T122530",
-				"end_date" => "20200910T230030"
-			);
-
+			//ここからgoogle calender追加のためのコード
 			$startdate = str_replace("/", "", $item->StartDate);
 			$enddate = str_replace("/", "", $item->EndDate);
 
@@ -59,6 +50,7 @@ foreach($data['Items']->Item as $item){
 			."&location=".$item->Location->Location["Value"]
 			."&dates="	.$startdate."/".$enddate;
 			echo "<a href=\"$url\">カレンダーに登録</a>";
+			//ここまで
 			$event_location = array();
 	}
 	}
