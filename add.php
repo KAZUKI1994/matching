@@ -1,0 +1,9 @@
+$startdate = str_replace("/", "", $item->StartDate);
+			$enddate = str_replace("/", "", $item->EndDate);
+			$url = "http://www.google.com/calendar/event?"
+			."action="."TEMPLATE"
+			."&text=".$item->Title
+			."&details=".""
+			."&location=".$item->Location->Location["Value"]
+			."&dates="	.$startdate."/".$enddate;
+			echo "<a href=\"$url\">カレンダーに登録</a>";
