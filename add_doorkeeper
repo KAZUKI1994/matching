@@ -1,0 +1,29 @@
+//doorkeeper
+
+//doorkeeper情報
+$door_url =  'http://api.doorkeeper.jp/events';
+$json = file_get_contents($door_url);
+$arr = json_decode($json, true);
+
+//doorkeeper表示
+foreach($arr as $event){
+	echo '<li>' . $event["event"]["title"] . '</li>';
+	echo '<li>' . $event["event"]["banner"] . '</li>';
+	echo '<li>' . $event["event"]["starts_at"] . '</li>';
+	echo '<li>' . $event["event"]["ends_at"] . '</li>';
+	echo '<li>' . $event["event"]["address"] . '</li>';
+	echo '<br />';
+
+
+	/*カレンダー登録ボタン
+	$startdate = str_replace("/", "", $item->StartDate);
+	$enddate = str_replace("/", "", $item->EndDate);
+	*/
+	$url = "http://www.google.com/calendar/event?"
+	."action="."TEMPLATE"
+	."&text=".$event["event"]["title"]
+	."&details=".""
+	."&location=".$event["event"]["address"]
+	."&dates="	.$event["event"]["starts_at"]."/".$event["event"]["ends_at"];
+	echo "<a href=\"$url\">カレンダーに登録</a>";
+}
